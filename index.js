@@ -1,13 +1,27 @@
 let quotes = [];
 
 // Fetch quotes from the server
-fetch('db.json') // Update with the correct path to your db.json
-    .then(response => response.json())
+fetch('https://quote-generator-ki3z.onrender.com/')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        quotes = data; // Assign data to quotes
-        console.log('Fetched quotes:', quotes);
-        displayQuote(); // Display a random quote right after fetching
-        setQuoteOfTheDay(); // Set or update the quote of the day
+        console.log('Fetched data:', data); // Log the fetched data
+        if (Array.isArray(data)) {
+            quotes = data; // Assign data to quotes
+            console.log('Fetched quotes:', quotes);
+            if (quotes.length === 0) {
+                console.error('No quotes available.');
+            } else {
+                displayQuote(); // Display only if there are quotes
+                setQuoteOfTheDay(); // Set or update the quote of the day
+            }
+        } else {
+            console.error('Unexpected data format:', data);
+        }
     })
     .catch(error => console.error('Error fetching quotes:', error));
 
@@ -23,7 +37,7 @@ function displayQuote(searchTerm = '') {
         return matchesMood && matchesSearch;
     });
 
-    console.log('Filtered quotes:', filteredQuotes);
+    console.log('Filtered quotes:', filteredQuotes); // Log filtered quotes
 
     if (filteredQuotes.length > 0) {
         const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
