@@ -1,0 +1,112 @@
+/* Base Styles */
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    background-color: #212121; /* Dark background for contrast */
+    background-image: url(b0536488d8053c5c30f71753c7322eb2.gif);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Header Styles */
+header {
+    background-color: rgba(51, 51, 51, 0.9); /* Semi-transparent header */
+    padding: 10px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar-brand {
+    color: #FFCC00; /* Bright yellow for brand */
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+/* Section Styles */
+section {
+    padding: 20px;
+    text-align: center;
+    color: #FFCC00; /* Bright text color */
+}
+
+/* Mood Selector */
+select {
+    padding: 10px;
+    margin: 20px 0;
+    font-size: 16px;
+    border: 2px solid #FF6F00; /* Orange border */
+    border-radius: 5px;
+}
+
+/* Quote Container Styles */
+.quote-container {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items to the top */
+    margin: 20px 0;
+}
+
+.quote-box {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    margin: 10px; /* Space between quote boxes */
+    flex: 1; /* Equal width for both boxes */
+    max-width: 400px; /* Limit max width */
+}
+
+/* Quote of the Day Specific Styles */
+#quote-of-the-day {
+    font-weight: bold;
+    color: #007bff; /* Change color for visibility */
+    margin-bottom: 10px; /* Space below quote of the day */
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #B22222; /* Firebrick color */
+    color: white; /* White text for contrast */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF4500; /* OrangeRed on hover */
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: #FFCC00; /* Bright footer text */
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    select, button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .quote-box {
+        max-width: 90%; /* Full width on small screens */
+    }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .quote-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .quote-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 10px;
+            flex: 1; /* Makes the boxes take equal space */
+        }
+        #quote-of-the-day {
+            font-weight: bold;
+            color: #007bff; /* Optional: Change color for visibility */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand">Quote Generator</a>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main style="background-image: url(b0536488d8053c5c30f71753c7322eb2.gif);">
+        <section id="about">
+            <h2>About</h2>
+            <p>This quote generator allows users to get inspirational quotes with the click of a button!</p>
+        </section>
+
+        <section id="quotes">
+            <h2>Select Your Mood</h2>
+            <div class="mood-selector">
+                <select id="mood-selector">
+                    <option value="all">All</option>
+                    <option value="Motivation">Motivation</option>
+                    <option value="Reflective">Reflective</option>
+                    <option value="Courage">Courage</option>
+                    <option value="Inspirational">Inspirational</option>
+                    <option value="Hope">Hope</option>
+                </select>
+            </div>
+
+            <div class="quote-container">
+                <div class="quote-box">
+                    <p id="quote">Click the button to get a quote!</p>
+                    <div class="quote-buttons">
+                        <button id="new-quote-btn">New Quote</button>
+                        <button class="share-quote-btn">Share</button>
+                        <button class="like-quote-btn">Like</button>
+                        <button class="dislike-quote-btn">Dislike</button>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    <p id="quote-of-the-day">Quote of the Day: </p>
+                    <button id="quote-of-the-day-btn">Get Quote of the Day</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="add-quote-container">
+            <h3>Add a New Quote</h3>
+            <form id="add-quote-form">
+                <input type="text" id="new-quote-text" placeholder="Quote" required>
+                <input type="text" id="new-quote-author" placeholder="Author" required>
+                <select id="new-quote-category">
+                    <option value="">Select Category (optional)</option>
+                    <option value="Motivation">Motivation</option>
+                    <option value="Reflective">Reflective</option>
+                    <option value="Courage">Courage</option>
+                    <option value="Inspirational">Inspirational</option>
+                    <option value="Hope">Hope</option>
+                </select>
+                <button type="submit">Add Quote</button>
+            </form>
+            <p id="add-quote-message"></p>
+        </section>
+
+        <section id="quote-history">
+            <h3>Your Quote History</h3>
+            <ul id="history-list" class="history-list">
+                <!-- History items will be populated here dynamically -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Quote Generator</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
