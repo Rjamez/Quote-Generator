@@ -1,7 +1,7 @@
 let quotes = [];
 
-// Fetch quotes from the server
-fetch('https://quote-generator-ki3z.onrender.com/quotes')
+// Fetch quotes from the local db.json
+fetch('/db.json') // Ensure this path is correct based on your setup
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -10,8 +10,8 @@ fetch('https://quote-generator-ki3z.onrender.com/quotes')
     })
     .then(data => {
         console.log('Fetched data:', data); // Log the fetched data
-        if (Array.isArray(data)) {
-            quotes = data; // Assign data to quotes
+        if (Array.isArray(data.quotes)) { // Access the quotes array
+            quotes = data.quotes; // Assign data to quotes
             console.log('Fetched quotes:', quotes);
             if (quotes.length === 0) {
                 console.error('No quotes available.');
@@ -90,21 +90,12 @@ document.getElementById('add-quote-form').addEventListener('submit', (event) => 
     const newQuoteAuthor = document.getElementById('new-quote-author').value;
     const newQuoteCategory = document.getElementById('new-quote-category').value;
 
-    const newQuote = { quote: newQuoteText, author: newQuoteAuthor, category: newQuoteCategory };
+    const newQuote = { quote: newQuoteText, author: newQuoteAuthor, category: newQuoteCategory, id: quotes.length + 1 }; // Generate a new ID
 
-    fetch('https://quote-generator-ki3z.onrender.com/quotes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newQuote),
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('add-quote-message').textContent = "Quote added successfully!";
-        quotes.push(data);
-        displayQuote();
-        setQuoteOfTheDay();
-    })
-    .catch(error => console.error('Error adding quote:', error));
+    quotes.push(newQuote);
+    displayQuote();
+    setQuoteOfTheDay();
+    document.getElementById('add-quote-message').textContent = "Quote added successfully!";
 });
 
 // Track Quote History
@@ -132,16 +123,6 @@ function updateQuoteHistoryUI() {
         }
     });
 }
-
-// Quote of the Day Button
-document.getElementById('quote-of-the-day-btn').addEventListener('click', () => {
-    fetch('https://quote-generator-ki3z.onrender.com/quotes/24')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('quote').textContent = `"${data.quote}" — ${data.author}`;
-        })
-        .catch(error => console.error('Error fetching quote of the day:', error));
-});
 
 // Share Quotes
 document.querySelector('.share-quote-btn').addEventListener('click', () => {

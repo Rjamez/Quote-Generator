@@ -21,15 +21,19 @@
             font-weight: bold;
             color: #007bff; /* Optional: Change color for visibility */
         }
+        .history-list {
+            list-style-type: none;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand">Quote Generator</a>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <a class="navbar-brand" href="#">Quote Generator</a>
+                <form class="d-flex" role="search" id="search-form">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>

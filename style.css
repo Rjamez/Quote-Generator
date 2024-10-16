@@ -43,6 +43,7 @@ select {
     font-size: 16px;
     border: 2px solid #FF6F00; /* Orange border */
     border-radius: 5px;
+    background-color: white; /* White background for contrast */
 }
 
 /* Quote Container Styles */
@@ -66,7 +67,7 @@ select {
 /* Quote of the Day Specific Styles */
 #quote-of-the-day {
     font-weight: bold;
-    color: #007bff; /* Change color for visibility */
+    color: #FF4500; /* Bright lava color */
     margin-bottom: 10px; /* Space below quote of the day */
 }
 
@@ -74,16 +75,59 @@ select {
 button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #B22222; /* Firebrick color */
+    background-color: #FF6F00; /* Lava orange */
     color: white; /* White text for contrast */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
 }
 
 button:hover {
-    background-color: #FF4500; /* OrangeRed on hover */
+    background-color: #FF4500; /* Bright red-orange on hover */
+    transform: scale(1.05); /* Slight grow effect */
+}
+
+/* Additional Button Styles for Specific Actions */
+.share-quote-btn {
+    background-color: #FF3300; /* Deep red for sharing */
+}
+
+.share-quote-btn:hover {
+    background-color: #CC0000; /* Darker red on hover */
+}
+
+.like-quote-btn {
+    background-color: #FF9933; /* Lighter lava color for liking */
+}
+
+.like-quote-btn:hover {
+    background-color: #CC7A29; /* Darker orange on hover */
+}
+
+.dislike-quote-btn {
+    background-color: #C70000; /* Darker red for disliking */
+}
+
+.dislike-quote-btn:hover {
+    background-color: #A00000; /* Darker red on hover */
+}
+
+/* Quote History Styles */
+#quote-history {
+    margin-top: 20px;
+}
+
+.history-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.history-list li {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
 }
 
 /* Footer Styles */
