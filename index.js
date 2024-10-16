@@ -1,7 +1,7 @@
 let quotes = [];
 
 // Fetch quotes from the server
-fetch('https://quote-generator-ki3z.onrender.com/')
+fetch('https://quote-generator-ki3z.onrender.com/quotes')
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -92,7 +92,7 @@ document.getElementById('add-quote-form').addEventListener('submit', (event) => 
 
     const newQuote = { quote: newQuoteText, author: newQuoteAuthor, category: newQuoteCategory };
 
-    fetch('https://quote-generator-ki3z.onrender.com/', {
+    fetch('https://quote-generator-ki3z.onrender.com/quotes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newQuote),
@@ -135,7 +135,7 @@ function updateQuoteHistoryUI() {
 
 // Quote of the Day Button
 document.getElementById('quote-of-the-day-btn').addEventListener('click', () => {
-    fetch('https://quote-generator-ki3z.onrender.com/24')
+    fetch('https://quote-generator-ki3z.onrender.com/quotes/24')
         .then(response => response.json())
         .then(data => {
             document.getElementById('quote').textContent = `"${data.quote}" — ${data.author}`;
