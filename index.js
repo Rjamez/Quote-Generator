@@ -78,7 +78,7 @@ document.getElementById('add-quote-form').addEventListener('submit', (event) => 
 
     const newQuote = { quote: newQuoteText, author: newQuoteAuthor, category: newQuoteCategory };
 
-    fetch('http://localhost:3000/', {
+    fetch('https://quote-generator-ki3z.onrender.com/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newQuote),
@@ -121,7 +121,7 @@ function updateQuoteHistoryUI() {
 
 // Quote of the Day Button
 document.getElementById('quote-of-the-day-btn').addEventListener('click', () => {
-    fetch('http://localhost:3000/24')
+    fetch('https://quote-generator-ki3z.onrender.com/24')
         .then(response => response.json())
         .then(data => {
             document.getElementById('quote').textContent = `"${data.quote}" — ${data.author}`;
