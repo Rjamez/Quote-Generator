@@ -10,7 +10,7 @@ The application includes some of the most inspiring,motivating,encoraging and em
 
 ## Setup/Installation Instruction
 
-* fork my work from my github page link -(https://github.com/Rjamez/Quote-Generator)
+* fork my work from my github page link -(<https://github.com/Rjamez/Quote-Generator>)
 * Git clone the files into your device via terminal
 * Open the extracted folder with VSCode
 * Go live or open the index.html file with chrome
@@ -32,6 +32,10 @@ HTML, CSS , Javascript, GIT, json server
 ## Support and contact details
 
 email :: <robin.adhola@student.moringaschool.com>
+For further explanation you can find my presentation on my slides:
+
+## slides
+https://docs.google.com/presentation/d/1Ll2ObM65owsDBMB8D2lrDW4ZMyowAQCmdvCTNsNtmqM/edit?usp=sharing
 
 ### License
 
