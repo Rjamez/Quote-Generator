@@ -1,9 +1,25 @@
+/* CSS Variables */
+:root {
+    --dark-bg: #212121;
+    --semi-transparent-header: rgba(51, 51, 51, 0.9);
+    --bright-yellow: #FFCC00;
+    --lava-orange: #FF6F00;
+    --bright-red-orange: #FF4500;
+    --deep-red: #FF3300;
+    --darker-red: #CC0000;
+    --light-lava: #FF9933;
+    --darker-orange: #CC7A29;
+    --dark-red: #C70000;
+    --darker-dark-red: #A00000;
+    --semi-transparent-white: rgba(255, 255, 255, 0.8);
+}
+
 /* Base Styles */
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 0;
     height: 100vh;
-    background-color: #212121; /* Dark background for contrast */
+    background-color: var(--dark-bg);
     background-image: url(b0536488d8053c5c30f71753c7322eb2.gif);
     background-size: cover;
     background-position: center;
@@ -11,7 +27,7 @@ body {
 
 /* Header Styles */
 header {
-    background-color: rgba(51, 51, 51, 0.9); /* Semi-transparent header */
+    background-color: var(--semi-transparent-header);
     padding: 10px 0;
 }
 
@@ -23,7 +39,7 @@ header {
 }
 
 .navbar-brand {
-    color: #FFCC00; /* Bright yellow for brand */
+    color: var(--bright-yellow);
     font-weight: bold;
     text-decoration: none;
     font-size: 24px;
@@ -33,7 +49,7 @@ header {
 section {
     padding: 20px;
     text-align: center;
-    color: #FFCC00; /* Bright text color */
+    color: var(--bright-yellow);
 }
 
 /* Mood Selector */
@@ -41,76 +57,76 @@ select {
     padding: 10px;
     margin: 20px 0;
     font-size: 16px;
-    border: 2px solid #FF6F00; /* Orange border */
+    border: 2px solid var(--lava-orange);
     border-radius: 5px;
-    background-color: white; /* White background for contrast */
+    background-color: white;
 }
 
 /* Quote Container Styles */
 .quote-container {
     display: flex;
-    justify-content: center; /* Center items horizontally */
-    align-items: flex-start; /* Align items to the top */
+    justify-content: center;
+    align-items: flex-start;
     margin: 20px 0;
 }
 
 .quote-box {
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    background: var(--semi-transparent-white);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    margin: 10px; /* Space between quote boxes */
-    flex: 1; /* Equal width for both boxes */
-    max-width: 400px; /* Limit max width */
+    margin: 10px;
+    flex: 1;
+    max-width: 400px;
 }
 
 /* Quote of the Day Specific Styles */
 #quote-of-the-day {
     font-weight: bold;
-    color: #FF4500; /* Bright lava color */
-    margin-bottom: 10px; /* Space below quote of the day */
+    color: var(--bright-red-orange);
+    margin-bottom: 10px;
 }
 
 /* Button Styles */
 button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #FF6F00; /* Lava orange */
-    color: white; /* White text for contrast */
+    background-color: var(--lava-orange);
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #FF4500; /* Bright red-orange on hover */
-    transform: scale(1.05); /* Slight grow effect */
+    background-color: var(--bright-red-orange);
+    transform: scale(1.05);
 }
 
 /* Additional Button Styles for Specific Actions */
 .share-quote-btn {
-    background-color: #FF3300; /* Deep red for sharing */
+    background-color: var(--deep-red);
 }
 
 .share-quote-btn:hover {
-    background-color: #CC0000; /* Darker red on hover */
+    background-color: var(--darker-red);
 }
 
 .like-quote-btn {
-    background-color: #FF9933; /* Lighter lava color for liking */
+    background-color: var(--light-lava);
 }
 
 .like-quote-btn:hover {
-    background-color: #CC7A29; /* Darker orange on hover */
+    background-color: var(--darker-orange);
 }
 
 .dislike-quote-btn {
-    background-color: #C70000; /* Darker red for disliking */
+    background-color: var(--dark-red);
 }
 
 .dislike-quote-btn:hover {
-    background-color: #A00000; /* Darker red on hover */
+    background-color: var(--darker-dark-red);
 }
 
 /* Quote History Styles */
@@ -124,7 +140,7 @@ button:hover {
 }
 
 .history-list li {
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    background: var(--semi-transparent-white);
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
@@ -135,8 +151,8 @@ footer {
     text-align: center;
     padding: 10px 0;
     background-color: #333;
-    color: #FFCC00; /* Bright footer text */
-    margin-top: auto; /* Push footer to the bottom */
+    color: var(--bright-yellow);
+    margin-top: auto;
 }
 
 /* Responsive Design */
@@ -151,6 +167,6 @@ footer {
     }
 
     .quote-box {
-        max-width: 90%; /* Full width on small screens */
+        max-width: 90%;
     }
 }

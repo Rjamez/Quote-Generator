@@ -1,31 +1,34 @@
+// Global Variables
 let quotes = [];
 
 // Fetch quotes from the local db.json
-fetch('/db.json') // Ensure this path is correct based on your setup
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Fetched data:', data); // Log the fetched data
-        if (Array.isArray(data.quotes)) { // Access the quotes array
-            quotes = data.quotes; // Assign data to quotes
-            console.log('Fetched quotes:', quotes);
-            if (quotes.length === 0) {
-                console.error('No quotes available.');
-            } else {
-                displayQuote(); // Display only if there are quotes
-                setQuoteOfTheDay(); // Set or update the quote of the day
+function fetchQuotes() {
+    fetch('/db.json') // Ensure this path is correct based on your setup
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-        } else {
-            console.error('Unexpected data format:', data);
-        }
-    })
-    .catch(error => console.error('Error fetching quotes:', error));
+            return response.json();
+        })
+        .then(data => {
+            console.log('Fetched data:', data); // Log the fetched data
+            if (Array.isArray(data.quotes)) {
+                quotes = data.quotes; // Assign data to quotes
+                console.log('Fetched quotes:', quotes);
+                if (quotes.length === 0) {
+                    console.error('No quotes available.');
+                } else {
+                    displayQuote(); // Display only if there are quotes
+                    setQuoteOfTheDay(); // Set or update the quote of the day
+                }
+            } else {
+                console.error('Unexpected data format:', data);
+            }
+        })
+        .catch(error => console.error('Error fetching quotes:', error));
+}
 
-// Function to display a random quote based on selected mood and search input
+// Display a random quote based on selected mood and search input
 function displayQuote(searchTerm = '') {
     const selectedMood = document.getElementById('mood-selector').value;
 
@@ -39,17 +42,18 @@ function displayQuote(searchTerm = '') {
 
     console.log('Filtered quotes:', filteredQuotes); // Log filtered quotes
 
+    const quoteElement = document.getElementById('quote');
     if (filteredQuotes.length > 0) {
         const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
         const randomQuote = filteredQuotes[randomIndex];
-        document.getElementById('quote').textContent = `"${randomQuote.quote}" — ${randomQuote.author}`;
+        quoteElement.textContent = `"${randomQuote.quote}" — ${randomQuote.author}`;
         trackQuoteHistory(randomQuote); // Track viewed quote
     } else {
-        document.getElementById('quote').textContent = "No quotes found.";
+        quoteElement.textContent = "No quotes found.";
     }
 }
 
-// Function to set the Quote of the Day
+// Set the Quote of the Day
 function setQuoteOfTheDay() {
     const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
     const storedDate = localStorage.getItem('quoteOfTheDayDate');
@@ -61,42 +65,18 @@ function setQuoteOfTheDay() {
         const quoteOfTheDay = quotes[randomIndex];
         localStorage.setItem('quoteOfTheDayDate', today);
         localStorage.setItem('quoteOfTheDay', JSON.stringify(quoteOfTheDay));
-    } else {
+        updateQuoteOfTheDayUI(quoteOfTheDay);
+    } else if (storedQuote) {
         const quoteOfTheDay = JSON.parse(storedQuote);
-        document.getElementById('quote-of-the-day').textContent = `"${quoteOfTheDay.quote}" — ${quoteOfTheDay.author}`;
+        updateQuoteOfTheDayUI(quoteOfTheDay);
     }
 }
 
-// Event listeners for buttons
-document.getElementById('new-quote-btn').addEventListener('click', () => {
-    const searchTerm = document.querySelector('input[type="search"]').value;
-    displayQuote(searchTerm);
-});
-
-document.getElementById('mood-selector').addEventListener('change', () => {
-    const searchTerm = document.querySelector('input[type="search"]').value;
-    displayQuote(searchTerm);
-});
-
-document.querySelector('form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const searchTerm = event.target.querySelector('input[type="search"]').value;
-    displayQuote(searchTerm);
-});
-
-document.getElementById('add-quote-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const newQuoteText = document.getElementById('new-quote-text').value;
-    const newQuoteAuthor = document.getElementById('new-quote-author').value;
-    const newQuoteCategory = document.getElementById('new-quote-category').value;
-
-    const newQuote = { quote: newQuoteText, author: newQuoteAuthor, category: newQuoteCategory, id: quotes.length + 1 }; // Generate a new ID
-
-    quotes.push(newQuote);
-    displayQuote();
-    setQuoteOfTheDay();
-    document.getElementById('add-quote-message').textContent = "Quote added successfully!";
-});
+// Update the Quote of the Day UI
+function updateQuoteOfTheDayUI(quote) {
+    const quoteOfTheDayElement = document.getElementById('quote-of-the-day');
+    quoteOfTheDayElement.textContent = `"${quote.quote}" — ${quote.author}`;
+}
 
 // Track Quote History
 function trackQuoteHistory(quote) {
@@ -124,29 +104,74 @@ function updateQuoteHistoryUI() {
     });
 }
 
-// Share Quotes
-document.querySelector('.share-quote-btn').addEventListener('click', () => {
-    const quoteText = document.getElementById('quote').textContent;
-    if (navigator.share) {
-        navigator.share({
-            title: 'Quote',
-            text: quoteText,
-            url: window.location.href
-        }).catch(error => console.error('Error sharing:', error));
-    } else {
-        alert('Share not supported on this browser.');
-    }
-});
+// Event Listeners
+function setupEventListeners() {
+    document.getElementById('new-quote-btn').addEventListener('click', () => {
+        const searchTerm = document.querySelector('input[type="search"]').value;
+        displayQuote(searchTerm);
+    });
 
-// Like/Dislike Quotes
-document.querySelector('.like-quote-btn').addEventListener('click', () => {
-    const quoteText = document.getElementById('quote').textContent;
-    console.log(`Liked: ${quoteText}`);
-    // Add functionality to save liked quotes if needed
-});
+    document.getElementById('mood-selector').addEventListener('change', () => {
+        const searchTerm = document.querySelector('input[type="search"]').value;
+        displayQuote(searchTerm);
+    });
 
-document.querySelector('.dislike-quote-btn').addEventListener('click', () => {
-    const quoteText = document.getElementById('quote').textContent;
-    console.log(`Disliked: ${quoteText}`);
-    // Add functionality to save disliked quotes if needed
-});
+    document.querySelector('form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const searchTerm = event.target.querySelector('input[type="search"]').value;
+        displayQuote(searchTerm);
+    });
+
+    document.getElementById('add-quote-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const newQuoteText = document.getElementById('new-quote-text').value;
+        const newQuoteAuthor = document.getElementById('new-quote-author').value;
+        const newQuoteCategory = document.getElementById('new-quote-category').value;
+
+        const newQuote = { 
+            quote: newQuoteText, 
+            author: newQuoteAuthor, 
+            category: newQuoteCategory, 
+            id: quotes.length + 1 
+        }; // Generate a new ID
+
+        quotes.push(newQuote);
+        displayQuote();
+        setQuoteOfTheDay();
+        document.getElementById('add-quote-message').textContent = "Quote added successfully!";
+    });
+
+    document.querySelector('.share-quote-btn').addEventListener('click', () => {
+        const quoteText = document.getElementById('quote').textContent;
+        if (navigator.share) {
+            navigator.share({
+                title: 'Quote',
+                text: quoteText,
+                url: window.location.href
+            }).catch(error => console.error('Error sharing:', error));
+        } else {
+            alert('Share not supported on this browser.');
+        }
+    });
+
+    document.querySelector('.like-quote-btn').addEventListener('click', () => {
+        const quoteText = document.getElementById('quote').textContent;
+        console.log(`Liked: ${quoteText}`);
+        // Add functionality to save liked quotes if needed
+    });
+
+    document.querySelector('.dislike-quote-btn').addEventListener('click', () => {
+        const quoteText = document.getElementById('quote').textContent;
+        console.log(`Disliked: ${quoteText}`);
+        // Add functionality to save disliked quotes if needed
+    });
+}
+
+// Initialize the App
+function initializeApp() {
+    fetchQuotes();
+    setupEventListeners();
+}
+
+// Start the App
+initializeApp();
